@@ -22,7 +22,7 @@ const heavyTask2 = async () => {
 const promiseHandlingFunction = async (params) => {
   const { shouldUsePool = true } = params;
   const promiseArr = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 15; i++) {
     if (shouldUsePool) {
       promiseArr.push(pool.exec("heavyTask"));
     } else {
@@ -50,15 +50,16 @@ app.get("/heavy", async (req, res) => {
 });
 
 app.get("/heavy2", async (req, res) => {
-  console.time(`start`);
+  // console.time(`start`);
   try {
-    const temp = await promiseHandlingFunction({ shouldUsePool: false });
+    const temp = await heavyTask2({ shouldUsePool: false });
+    console.log(temp);
     res.send(temp);
   } catch (e) {
     console.log(e);
   }
 
-  console.timeEnd(`start`);
+  // console.timeEnd(`start`);
 });
 
 app.listen(3000, () => console.log("Listening to port 3000"));

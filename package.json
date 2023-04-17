@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^1.3.5",
     "express": "^4.18.2",
+    "loadtest": "^5.2.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.22",
     "workerpool": "^6.4.0"
