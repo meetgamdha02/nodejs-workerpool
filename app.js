@@ -35,18 +35,20 @@ const promiseHandlingFunction = async (params) => {
   return _.flatten(result);
 };
 
+const doLongWaitFunction = async () => {
+  let counter = 0;
+  while (counter++ < 900000000);
+  return _.toString(counter);
+};
+
 app.get("/heavy", async (req, res) => {
-  console.log(workerpool.cpus);
-  console.time(`start`);
   try {
-    const temp = await promiseHandlingFunction({ shouldUsePool: true });
+    const temp = await doLongWaitFunction({ shouldUsePool: true });
     pool.terminate();
     res.send(temp);
   } catch (e) {
     console.log(e);
   }
-
-  console.timeEnd(`start`);
 });
 
 app.get("/heavy2", async (req, res) => {
@@ -62,4 +64,4 @@ app.get("/heavy2", async (req, res) => {
   // console.timeEnd(`start`);
 });
 
-app.listen(3000, () => console.log("Listening to port 3000"));
+app.listen(443, () => console.log("Listening to port 443"));
